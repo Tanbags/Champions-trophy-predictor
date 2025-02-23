@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Champion Trophy 2025 Predictor</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-blue: #0D47A1;
+      --secondary-blue: #1976D2;
+      --accent-gold: #FFD700;
+      --success-green: #4CAF50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a1f3a, #142850);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2.5rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1s ease-out;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--accent-gold);
+      font-size: 2.2em;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .select-container {
+      position: relative;
+      margin: 1.5rem 0;
+    }
+
+    select {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      font-size: 1rem;
+      appearance: none;
+      transition: all 0.3s ease;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .select-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue));
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(13, 71, 161, 0.4);
+    }
+
+    .analysis-phase {
+      margin: 2rem 0;
+      display: none;
+    }
+
+    .analysis-step {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideIn 0.5s forwards;
+    }
+
+    .analysis-icon {
+      font-size: 1.8rem;
+      margin-right: 1rem;
+      min-width: 40px;
+    }
+
+    .progress-container {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent-gold), var(--success-green));
+      transition: width 1s ease-in-out;
+    }
+
+    .result-card {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 1.5rem 0;
+      display: none;
+      animation: cardPop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .trophy {
+      font-size: 4rem;
+      text-align: center;
+      margin: 1rem 0;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes cardPop {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏆 CT 2025 Predictor</h1>
+    
+    <!-- Team Selection -->
+    <div class="select-container">
+      <select id="team1Select">
+        <option value="">Select First Team</option>
+        <option value="🇮🇳 India">🇮🇳 India</option>
+        <option value="🇵🇰 Pakistan">🇵🇰 Pakistan</option>
+        <option value="🇦🇺 Australia">🇦🇺 Australia</option>
+        <option value="🇳🇿 New Zealand">🇳🇿 New Zealand</option>
+        <option value="🏴󠁧󠁢󠁥󠁮󠁧󠁿 England">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</option>
+        <option value="🇿🇦 South Africa">🇿🇦 South Africa</option>
+        <option value="🇱🇰 Sri Lanka">🇱🇰 Sri Lanka</option>
+        <option value="🇧🇩 Bangladesh">🇧🇩 Bangladesh</option>
+      </select>
+      <div class="select-icon">▼</div>
+    </div>
+
+    <div class="select-container">
+      <select id="team2Select" disabled>
+        <option value="">Select Opponent</option>
+      </select>
+      <div class="select-icon">▼</div>
+    </div>
+
+    <button id="predictBtn" disabled>Analyze Matchup</button>
+
+    <!-- Advanced Analysis Section -->
+    <div class="analysis-phase" id="analysisPhase">
+      <div class="analysis-step" style="animation-delay: 0.2s;">
+        <div class="analysis-icon">📊</div>
+        <div>Analyzing team statistics...</div>
+      </div>
+      <div class="analysis-step" style="animation-delay: 0.6s;">
+        <div class="analysis-icon">🤖</div>
+        <div>Processing AI predictions...</div>
+      </div>
+      <div class="analysis-step" style="animation-delay: 1s;">
+        <div class="analysis-icon">📈</div>
+        <div>Evaluating social sentiment...</div>
+      </div>
+    </div>
+
+    <!-- Result Display -->
+    <div class="result-card" id="resultCard">
+      <div class="trophy">🏆</div>
+      <div id="winnerDisplay" class="winner-text"></div>
+      <div class="progress-container">
+        <div class="progress-bar" id="winProbability"></div>
+      </div>
+      <div id="analysisDetails"></div>
+    </div>
+  </div>
+
+  <script>
+    const teams = {
+      "🇮🇳 India": { rating: 92, form: [1,1,0,1], fans: 9.2 },
+      "🇵🇰 Pakistan": { rating: 88, form: [1,0,1,1], fans: 8.8 },
+      "🇦🇺 Australia": { rating: 95, form: [1,1,1,0], fans: 9.0 },
+      "🇳🇿 New Zealand": { rating: 90, form: [0,1,1,1], fans: 8.5 },
+      "🏴󠁧󠁢󠁥󠁮󠁧󠁿 England": { rating: 89, form: [1,0,0,1], fans: 8.7 },
+      "🇿🇦 South Africa": { rating: 87, form: [0,1,1,0], fans: 8.3 },
+      "🇱🇰 Sri Lanka": { rating: 84, form: [1,0,1,0], fans: 8.0 },
+      "🇧🇩 Bangladesh": { rating: 82, form: [0,0,1,1], fans: 7.8 }
+    };
+
+    // Dynamic opponent selection
+    document.getElementById('team1Select').addEventListener('change', function() {
+      const team2Select = document.getElementById('team2Select');
+      team2Select.innerHTML = '<option value="">Select Opponent</option>';
+      
+      if(this.value) {
+        Object.keys(teams).forEach(team => {
+          if(team !== this.value) {
+            const option = new Option(team, team);
+            team2Select.add(option);
+          }
+        });
+        team2Select.disabled = false;
+      } else {
+        team2Select.disabled = true;
+      }
+      document.getElementById('predictBtn').disabled = true;
+    });
+
+    document.getElementById('team2Select').addEventListener('change', function() {
+      document.getElementById('predictBtn').disabled = !this.value;
+    });
+
+    // Prediction logic
+    document.getElementById('predictBtn').addEventListener('click', async () => {
+      const team1 = document.getElementById('team1Select').value;
+      const team2 = document.getElementById('team2Select').value;
+      
+      document.querySelector('.container').style.height = 'auto';
+      document.getElementById('analysisPhase').style.display = 'block';
+      
+      // Simulate analysis steps
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Calculate probabilities
+      const t1Data = teams[team1];
+      const t2Data = teams[team2];
+      
+      const calculateScore = (team) => 
+        (team.rating * 0.4) + 
+        (team.form.reduce((a,b) => a + b, 0)/team.form.length * 30) + 
+        (team.fans * 3);
+
+      const t1Score = calculateScore(t1Data);
+      const t2Score = calculateScore(t2Data);
+      const total = t1Score + t2Score;
+      const t1Prob = Math.round((t1Score/total)*100);
+      
+      // Show results
+      document.getElementById('analysisPhase').style.display = 'none';
+      document.getElementById('winnerDisplay').textContent = 
+        `${team1.split(' ')[1]} has ${t1Prob}% chance to win`;
+      document.getElementById('winProbability').style.width = `${t1Prob}%`;
+      document.getElementById('analysisDetails').innerHTML = `
+        <div style="margin-top:1rem;">
+          <p>🔍 Prediction Factors:</p>
+          <p>${team1.split(' ')[1]} Rating: ${t1Data.rating}/100</p>
+          <p>${team2.split(' ')[1]} Rating: ${t2Data.rating}/100</p>
+          <p>Recent Form: ${t1Data.form.map(r => r ? 'W' : 'L').join(' ')} vs ${t2Data.form.map(r => r ? 'W' : 'L').join(' ')}</p>
+        </div>
+      `;
+      document.getElementById('resultCard').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
